@@ -1,0 +1,9 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/__pycache__": true,
+        "**/*.putest_cache": true,
+        "**/*.pyc": {"when": "$(basename).ext"},
+        "**/Thumbs.db": true
+    }
+}
