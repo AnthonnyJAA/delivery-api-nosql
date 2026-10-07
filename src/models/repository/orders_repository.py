@@ -40,7 +40,28 @@ class OrdersRepository:
         )
         return response
 
-    def select_by_id(self, object_id: str) -> dict:
+    def select_by_id(self, object_id: str) -> dict: #Selecionar um documento do banco de dados com base no ID
         collection = self.__db_connection.get_collection(self.__collection_name)
         data = collection.find_one({"_id": ObjectId(object_id)})
         return data
+
+    def edit_registry(self) -> None:
+        collection = self.__db_connection.get_collection(self.__collection_name)
+        collection.update_one(
+            {"_id": ObjectId("6abda7a4bbbde9f743f50148")}, #filtro
+            {"$set": {"cupom": True}} #edição do documento
+        )
+
+    def edit_many_registries(self) -> None:
+        collection = self.__db_connection.get_collection(self.__collection_name)
+        collection.update_many(
+            {"itens.refrigerante": {"$exists": True}}, #filtro
+            {"$set": {"itens.refrigerante.quantidade": 30}} #edição do documento
+        )
+
+    def edit__with_increment(self) -> None:
+            collection = self.__db_connection.get_collection(self.__collection_name)
+            collection.update_one(
+                {"_id": ObjectId("6abda7a4bbbde9f743f50148")}, #filtro
+                {"$inc": {"itens.pizza.quantidade": 2}} #edição do documento
+            )

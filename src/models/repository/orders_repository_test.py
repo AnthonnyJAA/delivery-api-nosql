@@ -71,7 +71,6 @@ def test_select_many_with_multiple_filters(): #Selecionar documentos do banco de
         print()
 
 @pytest.mark.skip(reason="Interacao com o banco")
-
 def test_select_many_with_or_filters(): 
     orders_repository = OrdersRepository(conn)
     doc_filter = {
@@ -85,10 +84,25 @@ def test_select_many_with_or_filters():
         print(doc)
         print()
 
-
+@pytest.mark.skip(reason="Interacao com o banco")
 def test_select_by_id():
     orders_repository = OrdersRepository(conn)
     object_id = "6abda7a4bbbde9f743f50148"  # Substitua pelo ObjectId real que você deseja consultar
     response = orders_repository.select_by_id(object_id)
     print()
     print(response)
+
+@pytest.mark.skip(reason="Interacao com o banco")
+def test_edit_registry():
+    orders_repository = OrdersRepository(conn)
+    orders_repository.edit_registry()
+
+@pytest.mark.skip(reason="Interacao com o banco")
+def test_edit_many_registries():
+    orders_repository = OrdersRepository(conn)
+    orders_repository.edit_many_registries()
+
+@pytest.mark.skip(reason="Interacao com o banco")
+def test_edit_with_increment():
+    orders_repository = OrdersRepository(conn)
+    orders_repository.edit__with_increment()
