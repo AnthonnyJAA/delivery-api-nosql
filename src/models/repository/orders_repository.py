@@ -1,6 +1,7 @@
 from bson.objectid import ObjectId
+from src.models.interface.orders_repository_interface import OrdersRepositoryInterface
 
-class OrdersRepository:
+class OrdersRepository(OrdersRepositoryInterface):
     def __init__(self, db_connection) -> None:
         self.__collection_name = "orders"
         self.__db_connection = db_connection
@@ -60,8 +61,16 @@ class OrdersRepository:
         )
 
     def edit__with_increment(self) -> None:
-            collection = self.__db_connection.get_collection(self.__collection_name)
-            collection.update_one(
-                {"_id": ObjectId("6abda7a4bbbde9f743f50148")}, #filtro
-                {"$inc": {"itens.pizza.quantidade": 2}} #edição do documento
-            )
+        collection = self.__db_connection.get_collection(self.__collection_name)
+        collection.update_one(
+            {"_id": ObjectId("6abda7a4bbbde9f743f50148")}, #filtro
+            {"$inc": {"itens.pizza.quantidade": 2}} #edição do documento
+        )
+
+    def delete_registry(self) -> None:
+        collection = self.__db_connection.get_collection(self.__collection_name)
+        collection.delete_one({"_id": ObjectId("6abda7a4bbbde9f743f50148")}) #filtro
+
+    def delete_many_registries(self) -> None:
+        collection = self.__db_connection.get_collection(self.__collection_name)
+        collection.delete_many({"itens.refrigerante": {"$exists": True}}) #filtro

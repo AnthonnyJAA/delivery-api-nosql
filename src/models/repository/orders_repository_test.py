@@ -106,3 +106,13 @@ def test_edit_many_registries():
 def test_edit_with_increment():
     orders_repository = OrdersRepository(conn)
     orders_repository.edit__with_increment()
+
+@pytest.mark.skip(reason="Interacao com o banco")
+def test_delete_registry():
+    orders_repository = OrdersRepository(conn)
+    orders_repository.delete_registry()
+
+@pytest.mark.skip(reason="Interacao com o banco")
+def test_delete_many_registries():
+    orders_repository = OrdersRepository(conn)
+    orders_repository.delete_many_registries()
