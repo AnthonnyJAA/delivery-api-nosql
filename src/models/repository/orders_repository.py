@@ -46,11 +46,11 @@ class OrdersRepository(OrdersRepositoryInterface):
         data = collection.find_one({"_id": ObjectId(object_id)})
         return data
 
-    def edit_registry(self) -> None:
+    def edit_registry(self, order_id: str, update_fields: dict) -> None:
         collection = self.__db_connection.get_collection(self.__collection_name)
         collection.update_one(
-            {"_id": ObjectId("6abda7a4bbbde9f743f50148")}, #filtro
-            {"$set": {"cupom": True}} #edição do documento
+            {"_id": ObjectId(order_id)}, #filtro
+            {"$set": update_fields} #edição do documento
         )
 
     def edit_many_registries(self) -> None:
